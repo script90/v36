@@ -1,13 +1,12 @@
 #!/bin/bash
-tput setaf 7 ; tput setab 4 ; tput bold ; printf '%30s%s%-15s\n' "TCP TWEAKER 1.0" ; tput sgr0
+tput setaf 7 ; tput setab 4 ; tput bold ; printf '%35s%s%-20s\n' "TCP Tweaker 1.0" ; tput sgr0
 if [[ `grep -c "^#PH56" /etc/sysctl.conf` -eq 1 ]]
 then
 	echo ""
-	echo -ne "\033[1;33mAs configurações de rede TCP Tweaker já foram adicionadas no sistema!"
+	echo "As configurações de rede TCP Tweaker já foram adicionadas no sistema!"
 	echo ""
-	echo -e "\n\033[1;37m[\033[1;31m1\033[1;37m] \033[1;33mDeseja remover as configurações do TCP Tweaker?\033[0m"
-	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i resposta0 ; tput sgr0
-	if [[ "$resposta0" = 'S | s' ]]; then
+	read -p "Deseja remover as configurações do TCP Tweaker? [s/n]: " -e -i n resposta0
+	if [[ "$resposta0" = 's' ]]; then
 		grep -v "^#PH56
 net.ipv4.tcp_window_scaling = 1
 net.core.rmem_max = 16777216
@@ -18,7 +17,7 @@ net.ipv4.tcp_low_latency = 1
 net.ipv4.tcp_slow_start_after_idle = 0" /etc/sysctl.conf > /tmp/syscl && mv /tmp/syscl /etc/sysctl.conf
 sysctl -p /etc/sysctl.conf > /dev/null
 		echo ""
-		echo -e "\033[1;32mTCP Tweaker foi removido!\033[0m"
+		echo "As configurações de rede do TCP Tweaker foram removidas com sucesso."
 		echo ""
 	exit
 	else 
@@ -27,15 +26,14 @@ sysctl -p /etc/sysctl.conf > /dev/null
 	fi
 else
 	echo ""
-	echo -e "\033[1;33mEste é um script experimental. Use por sua conta e risco!\033[0m"
-	echo -e "\033[1;33mEste script irá alterar algumas configurações de rede\033[0m"
-	echo -e "\033[1;33mdo sistema para reduzir a latência e melhorar a velocidade.\033[0m"
+	echo "Este é um script experimental. Use por sua conta e risco!"
+	echo "Este script irá alterar algumas configurações de rede"
+	echo "do sistema para reduzir a latência e melhorar a velocidade."
 	echo ""
-	echo -e "\n\033[1;37m[\033[1;31m1\033[1;37m] \033[1;33mContinuar com a instalação? [s/n]:\033[0m"
-	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i resposta ; tput sgr0
-	if [[ "$resposta" = 'S | s' ]]; then
+	read -p "Continuar com a instalação? [s/n]: " -e -i n resposta
+	if [[ "$resposta" = 's' ]]; then
 	echo ""
-	echo -e "\033[1;33mModificando as seguintes configurações:\033[0m"
+	echo "Modificando as seguintes configurações:"
 	echo " " >> /etc/sysctl.conf
 	echo "#PH56" >> /etc/sysctl.conf
 echo "net.ipv4.tcp_window_scaling = 1
@@ -48,11 +46,11 @@ net.ipv4.tcp_slow_start_after_idle = 0" >> /etc/sysctl.conf
 echo ""
 sysctl -p /etc/sysctl.conf
 		echo ""
-		echo -e "\033[1;32mTCP Tweaker foi adicionado com sucesso.\033[0m"
+		echo "As configurações de rede do TCP Tweaker foram adicionadas com sucesso."
 		echo ""
 	else
 		echo ""
-		echo -e "\033[1;31mA instalação foi cancelada pelo usuário!\033[0m"
+		echo "A instalação foi cancelada pelo usuário!"
 		echo ""
 	fi
 fi
