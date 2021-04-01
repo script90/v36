@@ -6,7 +6,7 @@ then
 	echo -ne "\033[1;33mAs configurações de rede TCP Tweaker já foram adicionadas no sistema!"
 	echo ""
 	echo -e "\n\033[1;37m[\033[1;31m1\033[1;37m] \033[1;33mDeseja remover as configurações do TCP Tweaker?\033[0m"
-	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i n resposta0 ; tput sgr0
+	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i resposta0 ; tput sgr0
 	if [[ "$resposta0" = 'S | s' ]]; then
 		grep -v "^#PH56
 net.ipv4.tcp_window_scaling = 1
@@ -32,7 +32,7 @@ else
 	echo -e "\033[1;33mdo sistema para reduzir a latência e melhorar a velocidade.\033[0m"
 	echo ""
 	echo -e "\n\033[1;37m[\033[1;31m1\033[1;37m] \033[1;33mContinuar com a instalação? [s/n]:\033[0m"
-	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i n resposta ; tput sgr0
+	tput setaf 2 ; tput bold ; read -p "S ou N" -e -i resposta ; tput sgr0
 	if [[ "$resposta" = 'S | s' ]]; then
 	echo ""
 	echo -e "\033[1;33mModificando as seguintes configurações:\033[0m"
