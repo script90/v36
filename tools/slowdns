@@ -20,7 +20,7 @@ banner='
 echo -e "${CORTITLE}=====================================${SCOLOR}" 
 echo -e "${CORTITLE}       SSHPLUS CLIENTE SLOWDNS       ${SCOLOR}"
 echo -e "${CORTITLE}=====================================${SCOLOR}" 
-echo -e "${RED}$banner${SCOLOR}"
+#echo -e "${RED}$banner${SCOLOR}"
 [[ ! -e dns ]] && {
     yes| termux-setup-storage > /dev/null 2>&1
     unset LD_PRELOAD > /dev/null 2>&1
