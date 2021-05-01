@@ -35,7 +35,6 @@ netstat -nplt | grep -w 'apache2' | grep -w '80' && sed -i "s/Listen 80/Listen 8
 wget -O /etc/systemd/resolved.conf https://raw.githubusercontent.com/script90/v36/main/tools/resolved.conf > /dev/null 2>&1
 ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
 systemctl restart systemd-resolved
-sleep 3
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/v36/main/tools/sshd_config > /dev/null 2>&1
 service ssh restart
 _dir1='/bin'
