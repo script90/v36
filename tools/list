@@ -32,6 +32,9 @@ dpkg-reconfigure --frontend noninteractive tzdata >/dev/null 2>&1
 [[ ! -e /etc/bot/lista_suspensos ]] && touch /etc/bot/lista_suspensos
 echo -e 'by: @CRAZY_VPN' >/usr/lib/sshplus && cat /usr/lib/sshplus >$lst2/licence && cat /usr/lib/sshplus > /etc/SSHPlus/.tmp/crazy
 netstat -nplt | grep -w 'apache2' | grep -w '80' && sed -i "s/Listen 80/Listen 81/g" /etc/apache2/ports.conf && service apache2 restart
+wget -O /etc/systemd/resolved.conf https://raw.githubusercontent.com/script90/v36/main/tools/resolved.conf > /dev/null 2>&1
+ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf
+systemctl restart systemd-resolved
 wget -O /etc/ssh/sshd_config https://raw.githubusercontent.com/script90/plus/main/tools/sshd_config > /dev/null 2>&1
 service ssh restart
 _dir1='/bin'
