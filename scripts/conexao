@@ -554,21 +554,21 @@
 				echo -e "\n\033[1;32mCRIANDO CERTIFICADO !\033[0m"
 				echo ""
 				ssl_certif() {
-					#crt='EC'
-					#openssl genrsa -out key.pem 2048 >/dev/null 2>&1
-					#(
-					#echo $crt
-					#echo $crt
-					#echo $crt
-					#echo $crt
-					#echo $crt
-					#echo $crt
-					#echo $crt
-					#) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
-					#cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
-					#rm key.pem cert.pem >/dev/null 2>&1
+					crt='EC'
+					openssl genrsa -out key.pem 2048 >/dev/null 2>&1
+					(
+					echo $crt
+					echo $crt
+					echo $crt
+					echo $crt
+					echo $crt
+					echo $crt
+					echo $crt
+					) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
+					cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
+					rm key.pem cert.pem >/dev/null 2>&1
 					sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-					cd /etc/stunnel && wget https://www.script90.tk/tools/stunnel.pem && cd $HOME
+					#cd /etc/stunnel && https://raw.githubusercontent.com/script90/v36/main/tools/stunnel.pem && cd $HOME
 				}
 				fun_bar 'ssl_certif'
 				echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
@@ -1074,7 +1074,7 @@
 			fun_dep() {
 				wget -O ~/EasyRSA-3.0.1.tgz "https://github.com/OpenVPN/easy-rsa/releases/download/3.0.1/EasyRSA-3.0.1.tgz"
 				[[ ! -e $HOME/EasyRSA-3.0.1.tgz ]] && {
-					wget -O ~/EasyRSA-3.0.1.tgz "https://www.script90.tk/tools/EasyRSA-3.0.1.tgz"
+					wget -O ~/EasyRSA-3.0.1.tgz "https://raw.githubusercontent.com/script90/v36/main/tools/EasyRSA-3.0.1.tgz"
 				}
 				tar xzf ~/EasyRSA-3.0.1.tgz -C ~/
 				mv ~/EasyRSA-3.0.1/ /etc/openvpn/
