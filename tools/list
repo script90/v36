@@ -81,7 +81,7 @@ clear
 crontab -r >/dev/null 2>&1
 (
 	crontab -l 2>/dev/null
-	echo "@daily /bin/verifatt"
+	echo "@reboot root ulimit -u unlimited && ulimit -n 65536"
 	echo "@reboot /etc/autostart"
 	echo "* * * * * /etc/autostart"
 	echo "0 */6 * * * /bin/uexpired"
