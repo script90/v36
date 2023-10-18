@@ -26,4 +26,4 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
 MaxSessions 9999
-MaxStartups 1500:10:1500
+MaxStartups 5000:10:5000
