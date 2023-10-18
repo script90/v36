@@ -6,7 +6,7 @@ SyslogFacility AUTH
 LogLevel INFO
 LoginGraceTime 120
 PermitRootLogin yes
-StrictModes yes
+StrictModes no
 RSAAuthentication yes
 PubkeyAuthentication yes
 IgnoreRhosts yes
@@ -25,3 +25,5 @@ TCPKeepAlive yes
 AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 UsePAM yes
+MaxSessions 9999
+MaxStartups 1500:10:1500
