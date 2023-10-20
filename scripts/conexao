@@ -554,21 +554,21 @@
 				echo -e "\n\033[1;32mCRIANDO CERTIFICADO !\033[0m"
 				echo ""
 				ssl_certif() {
-					crt='EC'
-					openssl genrsa -out key.pem 2048 >/dev/null 2>&1
-					(
-					echo $crt
-					echo $crt
-					echo $crt
-					echo $crt
-					echo $crt
-					echo $crt
-					echo $crt
-					) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
-					cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
-					rm key.pem cert.pem >/dev/null 2>&1
+					#crt='EC'
+					#openssl genrsa -out key.pem 2048 >/dev/null 2>&1
+					#(
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#echo $crt
+					#) | openssl req -new -x509 -key key.pem -out cert.pem -days 1050 >/dev/null 2>&1
+					#cat cert.pem key.pem >>/etc/stunnel/stunnel.pem
+					#rm key.pem cert.pem >/dev/null 2>&1
 					sed -i 's/ENABLED=0/ENABLED=1/g' /etc/default/stunnel4
-					#cd /etc/stunnel && https://raw.githubusercontent.com/script90/v36/main/tools/stunnel.pem && cd $HOME
+					cd /etc/stunnel && https://raw.githubusercontent.com/script90/v36/main/tools/stunnel.pem && cd $HOME
 				}
 				fun_bar 'ssl_certif'
 				echo -e "\n\033[1;32mINICIANDO O SSL TUNNEL !\033[0m"
@@ -1618,16 +1618,16 @@ exit 0' >$RCLOCAL
 		[[ "$(netstat -nltp | grep 'sslh' | wc -l)" = '0' ]] && {
 			clear
 			echo -e "\E[44;1;37m             INSTALADOR SSLH               \E[0m\n"
-			echo -e "\n\033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mA PORTA \033[1;37m3128 \033[1;32mSERA USADA POR PADRAO\033[0m\n"
+			echo -e "\n\033[1;33m[\033[1;31m!\033[1;33m] \033[1;32mA PORTA \033[1;37m90 \033[1;32mSERA USADA POR PADRAO\033[0m\n"
 			echo -ne "\033[1;32mREALMENTE DESEJA INSTALAR O SSLH \033[1;31m? \033[1;33m[s/n]:\033[1;37m "
 			read resp
 			[[ "$resp" = 's' ]] && {
-				verif_ptrs 3128
+				verif_ptrs 90
 				fun_instsslh() {
-					[[ -e "/etc/stunnel/stunnel.conf" ]] && ptssl="$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)" || ptssl='3128'
+					[[ -e "/etc/stunnel/stunnel.conf" ]] && ptssl="$(netstat -nplt | grep 'stunnel' | awk {'print $4'} | cut -d: -f2 | xargs)" || ptssl='443'
 					[[ -e "/etc/openvpn/server.conf" ]] && ptvpn="$(netstat -nplt | grep 'openvpn' | awk {'print $4'} | cut -d: -f2 | xargs)" || ptvpn='1194'
 					DEBIAN_FRONTEND=noninteractive apt-get -y install sslh
-					echo -e "#Modo autónomo\n\nRUN=yes\n\nDAEMON=/usr/sbin/sslh\n\nDAEMON_OPTS='--user sslh --listen 0.0.0.0:3128 --ssh  0.0.0.0:22 --ssl  0.0.0.0:$ptssl --http  0.0.0.0:80 --openvpn 127.0.0.1:$ptvpn --pidfile /var/run/sslh/sslh.pid'" >/etc/default/sslh
+					echo -e "#Modo autónomo\n\nRUN=yes\n\nDAEMON=/usr/sbin/sslh\n\nDAEMON_OPTS='--user sslh -t 5 --listen 0.0.0.0:90 --ssh  0.0.0.0:22 --ssl  0.0.0.0:$ptssl --openvpn 127.0.0.1:$ptvpn --pidfile /var/run/sslh/sslh.pid'" >/etc/default/sslh
 					/etc/init.d/sslh start && service sslh start
 				}
 				echo -e "\n\033[1;32mINSTALANDO O SSLH !\033[0m\n"
